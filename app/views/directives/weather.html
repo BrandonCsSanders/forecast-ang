@@ -1,0 +1,18 @@
+<div>
+  <div class="weather-dropdown btn-group full-width">
+    <button class="btn btn-default dropdown-toggle full-width" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span ng-bind="state.weatherType.label"></span> <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu full-width">
+      <li ng-click="setWeatherType(weatherType)" ng-repeat="weatherType in props.weatherTypes" ng-bind="weatherType.label">Minutely</li>
+    </ul>
+  </div>
+  <ul class="weather-container">
+    <li class="weather-point" ng-repeat="point in state.forecastData[state.weatherType.type].data">
+      <p ng-bind="point.time*1000 | date:'shortTime'"></p>
+      <skycon class="icon" icon="point.icon" color="props.icon.color"></skycon>
+      <p ng-bind="point.temperature"></p>
+      <p ng-bind="point.summary"></p>
+    </li>
+  </ul>
+</div>

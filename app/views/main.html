@@ -1,0 +1,13 @@
+<h1>Weather By Location</h1>
+<div class="map-autocomplete form-group full-width">
+  <input class="form-control" type="text" g-places-autocomplete ng-model="main.result"/>
+</div>
+
+<ui-gmap-google-map
+  center="main.map.center"
+  zoom="main.map.zoom"
+  options="main.map.otherOptions"
+  pan="true"
+  ></ui-gmap-google-map>
+
+<weather location="main.map.center"></weather>
