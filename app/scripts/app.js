@@ -14,8 +14,9 @@ angular
     'ngAria',
     'ngMessages',
     'ngResource',
+    'ngRoute',
     'ngSanitize',
     'google.places',
     'uiGmapgoogle-maps',
-    'angular-skycons',
+    'angular-skycons'
   ]);

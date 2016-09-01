@@ -42,7 +42,10 @@ module.exports = function (grunt) {
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'karma']
+        tasks: [
+          'newer:jshint:test',
+          //'karma'
+        ]
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -68,7 +71,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -181,22 +184,22 @@ module.exports = function (grunt) {
         src: ['<%= yeoman.app %>/index.html'],
         ignorePath:  /\.\.\//
       },
-      test: {
-        devDependencies: true,
-        src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
-        fileTypes:{
-          js: {
-            block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
-            }
-          }
-      },
+      //test: {
+      //  devDependencies: true,
+      //  src: '<%= karma.unit.configFile %>',
+      //  ignorePath:  /\.\.\//,
+      //  fileTypes:{
+      //    js: {
+      //      block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
+      //        detect: {
+      //          js: /'(.*\.js)'/gi
+      //        },
+      //        replace: {
+      //          js: '\'{{filePath}}\','
+      //        }
+      //      }
+      //    }
+      //},
       sass: {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
@@ -414,15 +417,12 @@ module.exports = function (grunt) {
     },
 
     // Test settings
-    karma: {
-      unit: {
-        //configFile: 'test/karma.conf.js',
-        singleRun: true,
-        port: 9999,
-        browsers: ['Chrome'],
-        logLevel: 'ERROR'
-      }
-    }
+    //karma: {
+    //  unit: {
+    //    configFile: 'test/karma.conf.js',
+    //    singleRun: true
+    //  }
+    //}
   });
 
 
@@ -452,7 +452,7 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    //'karma'
   ]);
 
   grunt.registerTask('build', [

@@ -14,10 +14,11 @@ angular.module('angApp')
     me.result = {};
     me.map = {
       center: {
-        latitude: 45,
-        longitude: -73
+        // Washington, DC, USA - default
+        latitude: 38.907192300000006,
+        longitude: -77.03687070000002
       },
-      zoom: 8,
+      zoom: 9,
       otherOptions: {
         scrollwheel: false
       }
@@ -29,6 +30,7 @@ angular.module('angApp')
       if (!newVal.geometry) {
         return;
       }
+      console.log(me.result);
       me.map.center.latitude = newVal.geometry.location.lat();
       me.map.center.longitude = newVal.geometry.location.lng();
     });

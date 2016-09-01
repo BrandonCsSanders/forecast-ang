@@ -1,18 +1,51 @@
 <div>
-  <div class="weather-dropdown btn-group full-width">
-    <button class="btn btn-default dropdown-toggle full-width" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <section class="weather-dropdown btn-group full-width">
+    <button class="weather-dropdown-btn btn btn-default dropdown-toggle full-width" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <span ng-bind="state.weatherType.label"></span> <span class="caret"></span>
     </button>
     <ul class="dropdown-menu full-width">
       <li ng-click="setWeatherType(weatherType)" ng-repeat="weatherType in props.weatherTypes" ng-bind="weatherType.label">Minutely</li>
     </ul>
-  </div>
-  <ul class="weather-container">
-    <li class="weather-point" ng-repeat="point in state.forecastData[state.weatherType.type].data">
-      <p ng-bind="point.time*1000 | date:'shortTime'"></p>
-      <skycon class="icon" icon="point.icon" color="props.icon.color"></skycon>
-      <p ng-bind="point.temperature"></p>
-      <p ng-bind="point.summary"></p>
-    </li>
-  </ul>
+  </section>
+  <section class="overall-weather-container" ng-if="state.forecastData">
+    <skycon size="100" class="icon" icon="state.forecastData[state.weatherType.type].icon" color="props.icon.color"></skycon>
+    <p class="text-center thin-font" ng-bind="state.forecastData[state.weatherType.type].summary"></p>
+  </section>
+  <section ng-if="state.forecastData" class="fx-fade-normal">
+    <ul class="weather-container">
+      <li class="weather-point" ng-repeat="point in state.forecastData[state.weatherType.type].data">\
+
+        <p ng-bind="point.time*1000 | date:'shortTime'"></p>
+        <hr/>
+        <skycon ng-if="point.icon" class="icon" icon="point.icon" color="props.icon.color"></skycon>
+        <div ng-if="point.temperature">
+          <p>
+            {{point.temperature}}&deg;<sup>F</sup>
+          </p>
+          <hr/>
+        </div>
+        <div ng-if="point.summary">
+          <p class="point-summary" ng-bind="point.summary"></p>
+          <hr/>
+        </div>
+        <div ng-if="point.precipIntensity !== undefined">
+          <p class="value-label thin-font">
+            Precip. Intensity
+          </p>
+          <p class="precip-value">
+            {{point.precipIntensity}}<sup>in/hr</sup>
+          </p>
+          <hr/>
+        </div>
+        <div ng-if="point.precipProbability !== undefined">
+          <p class="value-label thin-font">
+            Precip. Probability
+          </p>
+          <p class="precip-value">
+            {{point.precipProbability}}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </section>
 </div>

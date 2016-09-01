@@ -12,13 +12,13 @@ angular.module('angApp')
       templateUrl: 'views/directives/weather.html',
       restrict: 'E',
       scope: {
-        location: '='
+        location: '=?'
       },
       replace: true,
-      link: function postLink(scope, element, attrs) {
+      link: function postLink(scope) {
         scope.props = {
           icon: {
-            color: "#fff"
+            color: '#fff'
           },
           weatherTypes: [
             {
@@ -43,7 +43,7 @@ angular.module('angApp')
 
         // wait for the data to come in.
         scope.$watch(function() {
-          return scope.location.latitude + scope.location.longitude
+          return scope.location.latitude + scope.location.longitude;
         }, function(newVal) {
           if(newVal && scope.location.latitude && scope.location.longitude) {
             getWeather(scope.location);
@@ -52,33 +52,13 @@ angular.module('angApp')
 
         function getWeather(newVal) {
           ForecastService.Forecast.get(newVal).$promise.then(function(data) {
-            console.log(data);
             scope.state.forecastData = data;
           });
-
-          // hourly
-          /*
-           apparentTemperature: 59.65
-           cloudCover:          0.05
-           dewPoint:            52.1
-           humidity:            0.76
-           icon:                "clear-night"
-           ozone:               303.75
-           precipIntensity:     0
-           precipProbability:   0
-           pressure:            1017.4
-           summary:             "Clear"
-           temperature:         59.65
-           time:                1472540400
-           visibility:          9.86
-           windBearing:         272
-           windSpeed:           1.79
-           */
         }
 
         scope.setWeatherType = function(weatherType) {
           scope.state.weatherType = weatherType;
-        }
+        };
       }
     };
   }]);

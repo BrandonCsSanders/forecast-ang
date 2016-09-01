@@ -7,11 +7,8 @@
  * # forecast
  * Service in the angApp.
  */
-angular.module('angApp')
-  .service('ForecastService', ['$resource', ForecastService]);
 
 function ForecastService($resource) {
-  ///https://api.forecast.io/forecast/a8d5465e232e3f91637697095df995ab/37.8267,-122.423
   this._urlRoot = 'https://api.forecast.io/forecast/';
   this._key = 'a8d5465e232e3f91637697095df995ab';
   this.Forecast = $resource(this._urlRoot + ':key/:latitude,:longitude',
@@ -29,5 +26,6 @@ function ForecastService($resource) {
         }
       }
     });
-
 }
+
+angular.module('angApp').service('ForecastService', ['$resource', ForecastService]);
