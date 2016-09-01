@@ -14,10 +14,15 @@ body {
   background-color: #333;
 }
 
-h1 {
+h1, h2 {
   color: #ffffff;
   text-align: center;
   margin: 0;
+}
+
+h2 {
+  font-weight: 200;
+  min-height: 33px;
 }
 
 section {

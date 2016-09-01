@@ -8,6 +8,7 @@
     </ul>
   </section>
   <section class="overall-weather-container" ng-if="state.forecastData">
+    <p>Today is {{ state.today | date:'longDate' }}</p>
     <skycon size="100" class="icon" icon="state.forecastData[state.weatherType.type].icon" color="props.icon.color"></skycon>
     <p class="text-center thin-font" ng-bind="state.forecastData[state.weatherType.type].summary"></p>
   </section>
@@ -15,7 +16,7 @@
     <ul class="weather-container">
       <li class="weather-point" ng-repeat="point in state.forecastData[state.weatherType.type].data">\
 
-        <p ng-bind="point.time*1000 | date:'shortTime'"></p>
+        <p ng-bind="point.time*1000 | date:state.weatherType.dateType "></p>
         <hr/>
         <skycon ng-if="point.icon" class="icon" icon="point.icon" color="props.icon.color"></skycon>
         <div ng-if="point.temperature">

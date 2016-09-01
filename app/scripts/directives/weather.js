@@ -23,23 +23,32 @@ angular.module('angApp')
           weatherTypes: [
             {
               type: 'minutely',
-              label: 'Minutely'
+              label: 'Minutely',
+              dateType: 'shortTime'
             },
             {
               type: 'hourly',
-              label: 'Hourly'
+              label: 'Hourly',
+              dateType: 'shortTime'
             },
             {
               type: 'daily',
-              label: 'Daily'
+              label: 'Daily',
+              dateType: 'mediumDate'
             }
           ]
         };
 
         scope.state = {
           weatherType: scope.props.weatherTypes[1],
-          forecastData: {}
+          forecastData: {},
+          dateType: 'shortTime',
+          today: new Date()
         };
+
+        scope.dateType = function(type) {
+
+        }
 
         // wait for the data to come in.
         scope.$watch(function() {
@@ -58,6 +67,7 @@ angular.module('angApp')
 
         scope.setWeatherType = function(weatherType) {
           scope.state.weatherType = weatherType;
+
         };
       }
     };
