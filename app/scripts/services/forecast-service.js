@@ -10,7 +10,8 @@
 
 function ForecastService($resource) {
   this._urlRoot = 'https://api.forecast.io/forecast/';
-  this._key = 'a8d5465e232e3f91637697095df995ab';
+  this._key = 'a8d5465e232e3f91637697095df995ab'; // forecast.io app key
+  // register a JSONP resource
   this.Forecast = $resource(this._urlRoot + ':key/:latitude,:longitude',
     {
       key: this._key,

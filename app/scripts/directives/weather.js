@@ -16,6 +16,7 @@ angular.module('angApp')
       },
       replace: true,
       link: function postLink(scope) {
+        // weather widget properties
         scope.props = {
           icon: {
             color: '#fff'
@@ -39,6 +40,7 @@ angular.module('angApp')
           ]
         };
 
+        // weather widget states
         scope.state = {
           weatherType: scope.props.weatherTypes[1],
           forecastData: {},
@@ -46,11 +48,14 @@ angular.module('angApp')
           today: new Date()
         };
 
-        scope.dateType = function(type) {
-
+        // fetch the weather data from the service
+        function getWeather(newVal) {
+          ForecastService.Forecast.get(newVal).$promise.then(function(data) {
+            scope.state.forecastData = data;
+          });
         }
 
-        // wait for the data to come in.
+        // wait for the data to come in via registering a listener on the digest loop.
         scope.$watch(function() {
           return scope.location.latitude + scope.location.longitude;
         }, function(newVal) {
@@ -59,15 +64,9 @@ angular.module('angApp')
           }
         });
 
-        function getWeather(newVal) {
-          ForecastService.Forecast.get(newVal).$promise.then(function(data) {
-            scope.state.forecastData = data;
-          });
-        }
-
+        // on selecting a type from the dropdown, set the state
         scope.setWeatherType = function(weatherType) {
           scope.state.weatherType = weatherType;
-
         };
       }
     };
